@@ -83,7 +83,7 @@ def load_and_prep_image(image):
     img_array = np.expand_dims(img_array, axis=0)  # Add a batch dimension
     return img_array
 
-st.title('Image Classification For Vegetables')
+st.title('Image Classification For Vegetables.')
 
 uploaded_file = st.file_uploader("Choose an image...", type=["jpg", "jpeg", "png"])
 if uploaded_file is not None:
