@@ -3,9 +3,26 @@ from tensorflow.keras.models import load_model
 import numpy as np
 from PIL import Image
 import tensorflow as tf
+from pathlib import Path
+import os
 
-# Load the saved model
-model = load_model(r"notebooks\final_model_ninja.h5")
+def find_base_dir():
+    """
+    Dynamically find the base directory based on the existence of 'notebooks' subdirectory.
+    """
+    current_dir = Path(os.getcwd())
+    while current_dir != current_dir.root:
+        if (current_dir / 'notebooks').exists():
+            return current_dir
+        current_dir = current_dir.parent
+    return None  # or raise an error if preferred
+
+base_dir = find_base_dir()
+model_path = base_dir / "notebooks" / "final_model_ninja.h5"
+
+model = load_model(model_path)
+
+
 class_names = ['indian market', 'onion', 'potato', 'tomato'] #1
 # class_names = ['indian market','tomato' , 'potato', 'onion']
 def load_and_prep_image(image):
