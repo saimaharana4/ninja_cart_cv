@@ -5,7 +5,7 @@ from PIL import Image
 import tensorflow as tf
 
 # Load the saved model
-model = load_model(r"D:\ninja_cart_cv\notebooks\final_model_ninja.h5")
+model = load_model(r"notebooks\final_model_ninja.h5")
 class_names = ['indian market', 'onion', 'potato', 'tomato'] #1
 # class_names = ['indian market','tomato' , 'potato', 'onion']
 def load_and_prep_image(image):
