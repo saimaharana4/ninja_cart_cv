@@ -43,12 +43,33 @@ This application utilizes a deep learning model to classify images of vegetables
 Simply upload an image of a vegetable, and the app will predict whether the image is of an onion, potato, tomato, or represents a scene from an Indian market.
 """)
 
+# uploaded_file = st.file_uploader("Choose an image...", type=["jpg", "jpeg", "png"])
+# if uploaded_file is not None:
+#     image = load_and_prep_image(uploaded_file)
+#     st.image(image.squeeze(), caption='Uploaded Image', use_column_width=True, width=100)  # Reduced width for smaller display
+#     prediction = model.predict(image)
+#     class_indices = prediction.argmax(axis=1)
+#     prediction_text = f'**Prediction: {class_names[class_indices[0]]}**'
+#     # Display prediction in a box with some styling
+#     st.success(prediction_text)
+
+# uploaded_file = st.file_uploader("Choose an image...", type=["jpg", "jpeg", "png"])
+# if uploaded_file is not None:
+#     image = load_and_prep_image(uploaded_file)
+#     # Set a specific size for the image display
+#     st.image(image.squeeze(), caption='Uploaded Image', width=200, use_column_width=False)
+#     prediction = model.predict(image)
+#     class_indices = prediction.argmax(axis=1)
+#     prediction_text = f'**Prediction: {class_names[class_indices[0]]}**'
+#     # Display prediction in a styled box
+#     st.success(prediction_text)
 uploaded_file = st.file_uploader("Choose an image...", type=["jpg", "jpeg", "png"])
 if uploaded_file is not None:
     image = load_and_prep_image(uploaded_file)
-    st.image(image.squeeze(), caption='Uploaded Image', use_column_width=True, width=100)  # Reduced width for smaller display
-    prediction = model.predict(image)
-    class_indices = prediction.argmax(axis=1)
-    prediction_text = f'**Prediction: {class_names[class_indices[0]]}**'
-    # Display prediction in a box with some styling
-    st.success(prediction_text)
+    # Using columns to center the image
+    col1, col2, col3 = st.columns([1,2,1])
+    with col2:  # This column is the middle column
+        st.image(image.squeeze(), caption='Uploaded Image', use_column_width=True)
+        prediction = model.predict(image)
+        class_indices = prediction.argmax(axis=1)
+    st.success(f'**Prediction: {class_names[class_indices[0]]}**')
